@@ -9,9 +9,12 @@ public class Stage : MonoBehaviour
     private Dictionary<Vector3Int, GridObject> gridObjects;
 
     Grid grid;
+
+    StageTimeline timeline;
     private void Awake() {
         grid = GetComponent<Grid>();
         gridObjects = new Dictionary<Vector3Int, GridObject>();
+        timeline = GetComponent<StageTimeline>();
     }
 
     private delegate void GridObjectOperation(Vector3Int pos, GridObject gridObject, params object[] args);
@@ -61,5 +64,9 @@ public class Stage : MonoBehaviour
         ModifyGridObject(newPos, gridObject, PushAdjacentObjects, direction);
 
         ModifyGridObject(newPos, gridObject, AddGridObject);
+    }
+
+    public void AdvanceTime() {
+        timeline.Advance();
     }
 }

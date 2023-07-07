@@ -27,6 +27,23 @@ public class GridObject : MonoBehaviour
         
     }
 
+    public void Move(string direction) {
+        switch (direction.ToLower()) {
+            case "n":
+                Move(new Vector3Int(0, 1));
+                break;
+            case "s":
+                Move(new Vector3Int(0, -1));
+                break;
+            case "e":
+                Move(new Vector3Int(-1, 0));
+                break;
+            case "w":
+                Move(new Vector3Int(1, 0));
+                break;
+        }
+    }
+
     public void Move(Vector3Int direction) {
         stageObject.MoveObject(this, direction);
     }
