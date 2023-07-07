@@ -33,11 +33,6 @@ public class Stage : MonoBehaviour
     }
 
     private void PushAdjacentObjects(Vector3Int pos, GridObject gridObject, params object[] args) {
-        Debug.Log("------" + pos);
-        foreach (var key in gridObjects.Keys) {
-            Debug.Log(key);
-        }
-        Debug.Log(args);
         if (gridObjects.TryGetValue(pos, out GridObject newGridObject)) {
             newGridObject.Move((Vector3Int) args[0]);
         }
@@ -53,8 +48,7 @@ public class Stage : MonoBehaviour
 
 
     public void MoveObject(GridObject gridObject, Vector3Int direction) {
-        Debug.Log(gridObject.name);
-        Vector3Int gridPos = grid.WorldToCell(gridObject.transform.position);
+        Vector3Int gridPos = grid.WorldToCell(gridObject.transform.position - gridObject.GridAnchor);
 
         // TODO, some logic about hitting walls.
         Vector3Int newPos = gridPos + direction;
