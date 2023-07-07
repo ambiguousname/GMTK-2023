@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : GridObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void OnMovement(InputValue value) {
+        var move = value.Get<Vector2>();
+        // So we can only move in one direction:
+        if (move.x != 0) {
+            Move(new Vector3Int((int)move.x, 0, 0));
+        } else if (move.y != 0) {
+            Move(new Vector3Int(0, (int)move.y, 0));
+        }
     }
 }
