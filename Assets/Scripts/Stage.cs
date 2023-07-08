@@ -76,6 +76,13 @@ public class Stage : MonoBehaviour {
         ModifyGridObject(cellPos, gridObject, AddGridObject);
     }
 
+    public void DeregisterObject(GridObject gridObject) {
+        Vector3 offset = GetOffsetFromObject(gridObject);
+        var cellPos = grid.WorldToCell(gridObject.transform.position - offset);
+
+        ModifyGridObject(cellPos, gridObject, DeleteGridObject);
+    }
+
     public void RegisterTrigger(Trigger triggerObject) {
         var cellPos = grid.WorldToCell(triggerObject.transform.position);
         triggerObjects.Add(cellPos, triggerObject);
@@ -108,8 +115,8 @@ public class Stage : MonoBehaviour {
     }
 
     public void AdvanceTime() {
-        onAdvance.Invoke();
         timeline.Advance();
+        onAdvance.Invoke();
     }
 
     public void Excite(float amount) {

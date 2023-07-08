@@ -30,6 +30,13 @@ public class GridObject : MonoBehaviour
         }
     }
 
+    protected virtual void Destroy() {
+        if (stageObject != null) {
+            stageObject.DeregisterObject(this);
+        }
+        Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {

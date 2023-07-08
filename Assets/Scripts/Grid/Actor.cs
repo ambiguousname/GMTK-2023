@@ -28,14 +28,22 @@ public class Actor : GridObject
     }
 
     public void Talk(string direction, string dialogue) {
+        Vector3Int dir = GetDirectionFromString(direction);
+        Talk(dir, dialogue);
+    }
+
+    public void Talk(Vector3Int direction, string dialogue) {
         dialogueBox.gameObject.SetActive(true);
 
         var variableReplaced = GetVariablesFromDialogue(dialogue);
         dialogueBox.ShowText(variableReplaced);
 
-        Vector3Int dir = GetDirectionFromString(direction);
-        if (stageObject.TryGetAdjacent(this, dir, out GridObject result)) {
+        if (stageObject.TryGetAdjacent(this, direction, out GridObject result)) {
 
         }
+    }
+
+    public void Stab(Vector3Int direction) {
+        Talk(direction, "You stabbed me!");
     }
 }

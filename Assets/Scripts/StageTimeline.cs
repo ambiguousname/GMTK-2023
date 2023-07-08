@@ -95,7 +95,7 @@ public class StageTimeline : MonoBehaviour
             return;
         }
         foreach (var action in currActionList) {
-            Debug.Log(action.uniqueActionID);
+            //Debug.Log(action.uniqueActionID);
             if (action.uniqueActionID.Length > 0 && onUniqueAction.ContainsKey(action.uniqueActionID)) {
                 Debug.Log(action.uniqueActionID + " overridden.");
                 onUniqueAction[action.uniqueActionID].Invoke();
@@ -112,10 +112,10 @@ public class StageTimeline : MonoBehaviour
                 var methods = refType.GetMethods();
                 foreach (var method in methods) {
                     if (method.Name == action.type) {
-                        Debug.Log(method.Name);
+                        /*Debug.Log(method.Name);
                         foreach (var arg in action.args) {
                             Debug.Log(arg);
-                        }
+                        }*/
                         method.Invoke(component, action.args.ToArray());
                         break;
                     }
