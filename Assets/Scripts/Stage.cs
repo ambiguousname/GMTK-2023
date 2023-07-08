@@ -71,7 +71,6 @@ public class Stage : MonoBehaviour
 
     public void RegisterTrigger(Trigger triggerObject) {
         var cellPos = grid.WorldToCell(triggerObject.transform.position);
-        Debug.Log(cellPos);
         triggerObjects.Add(cellPos, triggerObject);
     }
 
