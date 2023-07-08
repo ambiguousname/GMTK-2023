@@ -1,4 +1,4 @@
-Talk:Inspector|N|He's dead!
+Talk:Inspector|E|He's dead!
 --
 Move:Wife|W
 --

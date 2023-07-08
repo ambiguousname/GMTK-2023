@@ -9,13 +9,37 @@ public class Player : Actor
     public GameObject nextNight;
     TextMeshProUGUI text;
     int night = 1;
+
+    string playerName;
+
     private void OnMurderWeaponSet(string value) {
         if (value == "Player") {
             stageObject.AddOnUniqueActionListener("MurderWeaponTalk", delegate () {
                 var wife = GameObject.Find("Wife").GetComponent<Actor>();
-                wife.Talk("S", "It seems that this... Player. Is. the. murder weapon.");
+                wife.Talk(-GetDirectionToPos(wife.transform.position), "It seems like... " + playerName + ". is the Murder. Weapon.");
             });
         }
+    }
+
+    private void Start() {
+        Initialize();
+        var names = new string[] { "Scarlet Vanderbrough", "Johannas Joplin", "Layton Kipling", "Katarina Fencepost"};
+        playerName = names[Random.Range(0, names.Length)];
+    }
+
+    protected override void TurnUpdate() {
+        if (fireTimer == 1) {
+            fireTimer = 0;
+            onFire = false;
+            NextNight();
+            text.text = "You burned yourself horribly.\n" + text.text;
+            return;
+        }
+        base.TurnUpdate();
+    }
+
+    public override void ActionAt(Actions a, Vector3Int direction) {
+        base.ActionAt(a, direction);
     }
 
 
@@ -25,6 +49,7 @@ public class Player : Actor
         nextNight.SetActive(true);
         night++;
         text.text = "Night " + night + " \n Press to continue.";
+        stageObject.ResetStage();
     }
 
     protected override void Initialize() {

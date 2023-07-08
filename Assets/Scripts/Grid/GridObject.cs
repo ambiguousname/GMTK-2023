@@ -39,23 +39,33 @@ public class GridObject : MonoBehaviour
     }
 
     public virtual void ResetObject() {
+        GetComponentInChildren<SpriteRenderer>().enabled = true;
         stageObject.DeregisterObject(this);
         this.transform.position = initialPosition;
         Initialize();
+        stageObject.onReset.RemoveListener(ResetObject);
     }
 
     public virtual void ActionAt(Actions a, Vector3Int direction) {
         stageObject.Excite(0.1f);
         if (a == Actions.FIRE) {
-            Destroy();
+            DestroyThisObject();
         }
     }
 
-    protected virtual void Destroy() {
+    protected Vector3Int GetDirectionToPos(Vector3 pos) {
+        var dist = pos - this.transform.position;
+        dist.Normalize();
+        return new Vector3Int((int)dist.x, (int)dist.y, (int)dist.z);
+    }
+
+    protected virtual void DestroyThisObject() {
         if (stageObject != null) {
             stageObject.DeregisterObject(this);
+            stageObject.onReset.AddListener(ResetObject);
+            Debug.Log(stageObject.onReset);
         }
-        Destroy(gameObject);
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame

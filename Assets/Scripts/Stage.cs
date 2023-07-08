@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class Stage : MonoBehaviour {
     public UnityEvent onAdvance;
     public UnityEvent beforeAdvance;
+    public UnityEvent onReset;
 
     private Dictionary<Vector3Int, GridObject> gridObjects;
     private Dictionary<Vector3Int, Trigger> triggerObjects;
@@ -30,6 +31,7 @@ public class Stage : MonoBehaviour {
     }
 
     public void ResetStage() {
+        timeline.ResetTimeline();
         audience.ResetExcitement();
         variables.Clear();
         onVariableSet.Clear();
@@ -44,6 +46,7 @@ public class Stage : MonoBehaviour {
         for (int i = 0; i < triggers.Length; i++) {
             triggers[i].ResetObject();
         }
+        onReset.Invoke();
     }
 
     private delegate bool GridObjectOperation(Vector3Int pos, GridObject gridObject, params object[] args);
@@ -116,7 +119,11 @@ public class Stage : MonoBehaviour {
 
     public void DeregisterTrigger(Trigger triggerObject) {
         var cellPos = grid.WorldToCell(triggerObject.transform.position);
-        triggerObjects.Remove(cellPos);
+        for (int i = 0; i < triggerObject.Scale.x; i++) {
+            for (int j = 0; j < triggerObject.Scale.y; j++) {
+                triggerObjects.Remove(cellPos - new Vector3Int(i, j));
+            }
+        }
     }
 
 

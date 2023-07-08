@@ -820,7 +820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257245370967700539, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4257245370967700539, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1656,6 +1656,9 @@ MonoBehaviour:
   beforeAdvance:
     m_PersistentCalls:
       m_Calls: []
+  onReset:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2134135772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1726,7 +1729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257245370967700539, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4257245370967700539, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
       propertyPath: m_LocalPosition.z

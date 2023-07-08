@@ -26,7 +26,7 @@ public class Knife : GridObject
                 actorToStab = (Actor)result;
                 directionToStab = -direction; 
                 stageObject.onAdvance.AddListener(StabOnce);
-                Destroy();
+                DestroyThisObject();
                 return true;
             }
         }

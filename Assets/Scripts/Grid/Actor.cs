@@ -19,8 +19,8 @@ public class Actor : GridObject
         initialTalkPos = talkToIndicator.transform.localPosition;
     }
 
-    int fireTimer = 0;
-    bool onFire = false;
+    protected int fireTimer = 0;
+    protected bool onFire = false;
     protected virtual void TurnUpdate() {
         if (fireTimer > 0) {
             fireTimer -= 1;
