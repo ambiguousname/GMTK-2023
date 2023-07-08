@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Stage : MonoBehaviour
 {
+    public UnityEvent onAdvance;
+
     private Dictionary<Vector3Int, GridObject> gridObjects;
 
     Grid grid;
@@ -67,6 +70,7 @@ public class Stage : MonoBehaviour
     }
 
     public void AdvanceTime() {
+        onAdvance.Invoke();
         timeline.Advance();
     }
 }

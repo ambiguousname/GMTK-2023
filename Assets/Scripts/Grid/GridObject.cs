@@ -13,6 +13,10 @@ public class GridObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Initialize();
+    }
+
+    protected void Initialize() {
         stageObject = GetComponentInParent<Stage>();
         if (stageObject == null) {
             Debug.LogError("Grid Object could not find Stage script in a parent.");

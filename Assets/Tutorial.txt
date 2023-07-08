@@ -1,4 +1,4 @@
-Move:Player|N
+Talk:Player|N|I don't believe it!
 --
 --
 --
