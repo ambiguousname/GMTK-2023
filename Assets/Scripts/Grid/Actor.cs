@@ -10,7 +10,7 @@ public class Actor : GridObject
     protected override void Initialize() {
         base.Initialize();
         if (stageObject != null) {
-            stageObject.onAdvance.AddListener(HideDialogue);
+            stageObject.beforeAdvance.AddListener(HideDialogue);
         }
     }
 

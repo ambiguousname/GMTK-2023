@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class Stage : MonoBehaviour {
     public UnityEvent onAdvance;
+    public UnityEvent beforeAdvance;
 
     private Dictionary<Vector3Int, GridObject> gridObjects;
     private Dictionary<Vector3Int, Trigger> triggerObjects;
@@ -115,6 +116,7 @@ public class Stage : MonoBehaviour {
     }
 
     public void AdvanceTime() {
+        beforeAdvance.Invoke();
         timeline.Advance();
         onAdvance.Invoke();
     }

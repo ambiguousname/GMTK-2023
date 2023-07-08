@@ -111,7 +111,14 @@ public class StageTimeline : MonoBehaviour
                 System.Type refType = component.GetType();
                 var methods = refType.GetMethods();
                 foreach (var method in methods) {
-                    if (method.Name == action.type) {
+                    bool isAllStringParams = true;
+                    foreach (var param in method.GetParameters()) {
+                        if (param.ParameterType != typeof(string)) {
+                            isAllStringParams = false;
+                            break;
+                        }
+                    }
+                    if (method.Name == action.type && isAllStringParams) {
                         /*Debug.Log(method.Name);
                         foreach (var arg in action.args) {
                             Debug.Log(arg);
