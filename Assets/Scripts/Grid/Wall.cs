@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Wall : GridObject
 {
-    public new readonly bool canMove = false;
     private void Start() {
         Initialize();
+        canMove = false;
     }
     public new void Move(Vector3Int direction) {
         return;

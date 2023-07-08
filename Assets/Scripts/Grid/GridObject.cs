@@ -8,7 +8,7 @@ public class GridObject : MonoBehaviour
 
     public Vector3Int Scale = new Vector3Int(1, 1);
 
-    public readonly bool canMove = true;
+    public bool canMove = true;
 
     protected Stage stageObject;
 

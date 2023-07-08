@@ -81,8 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ffff625f6dcb384db89f4b53da49330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridAnchor: {x: 0.5, y: 1, z: 0}
+  GridAnchor: {x: 0.5, y: 0, z: 0}
   Scale: {x: 1, y: 2, z: 0}
+  canMove: 1
   dialogueBox: {fileID: 7950445096055926885}
 --- !u!1 &7366841954722121841
 GameObject:

@@ -25,7 +25,7 @@ public class Stage : MonoBehaviour
     private bool ModifyGridObject(Vector3Int origin, GridObject gridObject, GridObjectOperation operation, params object[] args) { 
         for (int i = 0; i < gridObject.Scale.x; i++) {
             for (int j = 0; j < gridObject.Scale.y; j++) {
-                var successful = operation(origin + new Vector3Int(i, j), gridObject, args);
+                var successful = operation(origin - new Vector3Int(i, j), gridObject, args);
                 if (!successful) {
                     return successful;
                 }
@@ -57,14 +57,16 @@ public class Stage : MonoBehaviour
     public void RegisterObject(GridObject gridObject) {
         // Snap to the grid:
         var cellPos = grid.WorldToCell(gridObject.transform.position);
-        gridObject.transform.position = grid.CellToWorld(cellPos) + gridObject.GridAnchor;
+        Vector3 offset = new Vector3(gridObject.GridAnchor.x * grid.cellSize.x, gridObject.GridAnchor.y * grid.cellSize.y, gridObject.GridAnchor.z * grid.cellSize.z);
+        gridObject.transform.position = grid.CellToWorld(cellPos) + offset;
 
         ModifyGridObject(cellPos, gridObject, AddGridObject);
     }
 
 
     public bool MoveObject(GridObject gridObject, Vector3Int direction) {
-        Vector3Int gridPos = grid.WorldToCell(gridObject.transform.position - gridObject.GridAnchor);
+        Vector3 offset = new Vector3(gridObject.GridAnchor.x * grid.cellSize.x, gridObject.GridAnchor.y * grid.cellSize.y, gridObject.GridAnchor.z * grid.cellSize.z);
+        Vector3Int gridPos = grid.WorldToCell(gridObject.transform.position - offset);
 
         Vector3Int newPos = gridPos + direction;
 
@@ -73,7 +75,7 @@ public class Stage : MonoBehaviour
 
             ModifyGridObject(gridPos, gridObject, DeleteGridObject);
             ModifyGridObject(newPos, gridObject, AddGridObject);
-            gridObject.transform.position = grid.CellToWorld(newPos) + gridObject.GridAnchor;
+            gridObject.transform.position = grid.CellToWorld(newPos) + offset;
             return true;
         } else {
             return false;
