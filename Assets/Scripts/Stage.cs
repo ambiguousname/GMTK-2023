@@ -20,28 +20,38 @@ public class Stage : MonoBehaviour
         timeline = GetComponent<StageTimeline>();
     }
 
-    private delegate void GridObjectOperation(Vector3Int pos, GridObject gridObject, params object[] args);
+    private delegate bool GridObjectOperation(Vector3Int pos, GridObject gridObject, params object[] args);
 
-    private void ModifyGridObject(Vector3Int origin, GridObject gridObject, GridObjectOperation operation, params object[] args) { 
+    private bool ModifyGridObject(Vector3Int origin, GridObject gridObject, GridObjectOperation operation, params object[] args) { 
         for (int i = 0; i < gridObject.Scale.x; i++) {
             for (int j = 0; j < gridObject.Scale.y; j++) {
-                operation(origin + new Vector3Int(i, j), gridObject, args);
+                var successful = operation(origin + new Vector3Int(i, j), gridObject, args);
+                if (!successful) {
+                    return successful;
+                }
             }
         }
+        return true;
     }
 
-    private void DeleteGridObject(Vector3Int pos, GridObject gridObject, params object[] args) {
+    private bool DeleteGridObject(Vector3Int pos, GridObject gridObject, params object[] args) {
         gridObjects.Remove(pos);
+        return true;
     }
 
-    private void AddGridObject(Vector3Int pos, GridObject gridObject, params object[] args) {
+    private bool AddGridObject(Vector3Int pos, GridObject gridObject, params object[] args) {
         gridObjects.Add(pos, gridObject);
+        return true;
     }
 
-    private void PushAdjacentObjects(Vector3Int pos, GridObject gridObject, params object[] args) {
-        if (gridObjects.TryGetValue(pos, out GridObject newGridObject)) {
-            newGridObject.Move((Vector3Int) args[0]);
+    private bool PushAdjacentObjects(Vector3Int pos, GridObject gridObject, params object[] args) {
+        if (gridObjects.TryGetValue(pos, out GridObject newGridObject) && newGridObject != gridObject) {
+            if (!newGridObject.canMove) {
+                return false;
+            }
+            return MoveObject(newGridObject, (Vector3Int) args[0]);
         }
+        return true;
     }
 
     public void RegisterObject(GridObject gridObject) {
@@ -53,20 +63,21 @@ public class Stage : MonoBehaviour
     }
 
 
-    public void MoveObject(GridObject gridObject, Vector3Int direction) {
+    public bool MoveObject(GridObject gridObject, Vector3Int direction) {
         Vector3Int gridPos = grid.WorldToCell(gridObject.transform.position - gridObject.GridAnchor);
 
-        // TODO, some logic about hitting walls.
         Vector3Int newPos = gridPos + direction;
 
-        // TODO: Slide transition (call from GridObject itself)
-        gridObject.transform.position = grid.CellToWorld(newPos) + gridObject.GridAnchor;
+        if (ModifyGridObject(newPos, gridObject, PushAdjacentObjects, direction)) {
+            // TODO: Slide transition (call from GridObject itself)
 
-        ModifyGridObject(gridPos, gridObject, DeleteGridObject);
-
-        ModifyGridObject(newPos, gridObject, PushAdjacentObjects, direction);
-
-        ModifyGridObject(newPos, gridObject, AddGridObject);
+            ModifyGridObject(gridPos, gridObject, DeleteGridObject);
+            ModifyGridObject(newPos, gridObject, AddGridObject);
+            gridObject.transform.position = grid.CellToWorld(newPos) + gridObject.GridAnchor;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void AdvanceTime() {

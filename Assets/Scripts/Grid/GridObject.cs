@@ -8,7 +8,10 @@ public class GridObject : MonoBehaviour
 
     public Vector3Int Scale = new Vector3Int(1, 1);
 
+    public readonly bool canMove = true;
+
     protected Stage stageObject;
+
 
     // Start is called before the first frame update
     void Start()
