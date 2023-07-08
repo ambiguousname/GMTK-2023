@@ -39,7 +39,7 @@ public class Player : Actor
         var move = value.Get<Vector2>();
 
         if (isInNight) {
-            if (move.x > 0 || move.y > 0) {
+            if (move.x != 0 || move.y != 0) {
                 nextNight.SetActive(false);
                 isInNight = false;
             }
