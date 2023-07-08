@@ -1,5 +1,20 @@
-Talk:Player|N|I don't believe it!
+Talk:Inspector|N|He's dead!
 --
 --
-Talk:Player|N|A murder mystery in front of my own eyes!
 --
+Talk:Wife|W|It seems this is the murder weapon.
+--
+--
+--
+--
+--
+Talk:Inspector|E|I have solved the case!
+--
+--
+--
+--
+--
+--
+Talk:Inspector|N|This fire burns brightly and beautifully, like my mistress.
+--
+Talk:Inspector|S|The butler must have done it!

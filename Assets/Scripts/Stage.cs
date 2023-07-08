@@ -10,6 +10,7 @@ public class Stage : MonoBehaviour
     public UnityEvent onAdvance;
 
     private Dictionary<Vector3Int, GridObject> gridObjects;
+    private Dictionary<Vector3Int, Trigger> triggerObjects;
 
     Grid grid;
 
@@ -17,6 +18,7 @@ public class Stage : MonoBehaviour
     private void Awake() {
         grid = GetComponent<Grid>();
         gridObjects = new Dictionary<Vector3Int, GridObject>();
+        triggerObjects = new Dictionary<Vector3Int, Trigger>();
         timeline = GetComponent<StageTimeline>();
     }
 
@@ -45,11 +47,15 @@ public class Stage : MonoBehaviour
     }
 
     private bool PushAdjacentObjects(Vector3Int pos, GridObject gridObject, params object[] args) {
+        
         if (gridObjects.TryGetValue(pos, out GridObject newGridObject) && newGridObject != gridObject) {
             if (!newGridObject.canMove) {
                 return false;
             }
             return MoveObject(newGridObject, (Vector3Int) args[0]);
+        }
+        if (triggerObjects.TryGetValue(pos, out Trigger triggerVal)) {
+            triggerVal.onTrigger.Invoke(gridObject);
         }
         return true;
     }
@@ -61,6 +67,12 @@ public class Stage : MonoBehaviour
         gridObject.transform.position = grid.CellToWorld(cellPos) + offset;
 
         ModifyGridObject(cellPos, gridObject, AddGridObject);
+    }
+
+    public void RegisterTrigger(Trigger triggerObject) {
+        var cellPos = grid.WorldToCell(triggerObject.transform.position);
+        Debug.Log(cellPos);
+        triggerObjects.Add(cellPos, triggerObject);
     }
 
 
