@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridAnchor: {x: 0.5, y: 0, z: 0}
-  Scale: {x: 1, y: 1, z: 0}
+  Scale: {x: 1, y: 2, z: 0}
   canMove: 1
   dialogueBox: {fileID: 3253614910852960179}
 --- !u!1 &6925576410412324599
