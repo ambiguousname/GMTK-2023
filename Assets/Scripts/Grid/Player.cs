@@ -5,11 +5,20 @@ using UnityEngine.InputSystem;
 
 public class Player : Actor
 {
+    private void OnMurderWeaponSet(string value) {
+        if (value == "Player") {
+            stageObject.AddOnUniqueActionListener("MurderWeaponTalk", delegate () {
+                var wife = GameObject.Find("Wife").GetComponent<Actor>();
+                wife.Talk("S", "Test!");
+            });
+        }
+    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    protected override void Initialize() {
+        base.Initialize();
+        if (stageObject != null) {
+            stageObject.AddVariableSetListener("MurderWeapon", OnMurderWeaponSet);
+        }
     }
 
     void OnMovement(InputValue value) {

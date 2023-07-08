@@ -4,26 +4,31 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StageTimeline : MonoBehaviour
 {
-    private const string ActionLineRegex = @"(\w+):(\w+)|(.*)";
+    private const string ActionLineRegex = @"(%\w+%)*(\w+):(\w+)\|(.*)";
     private struct StageAction {
         public string type;
         public string objName;
         public List<string> args;
+        public string uniqueActionID;
         public StageAction(string actionLine) {
-            MatchCollection matches = Regex.Matches(actionLine, ActionLineRegex);
-            
+            var actionMatch = Regex.Match(actionLine, ActionLineRegex);
+            var actionInfo = actionMatch.Groups;
 
-            var actionInfo = matches[0].Groups;
-            type = actionInfo[1].Value;
+            uniqueActionID = actionInfo[1].Value.Replace("%","");
 
-            objName = actionInfo[2].Value;
+            type = actionInfo[2].Value;
+
+            objName = actionInfo[3].Value;
 
             args = new List<string>();
-            if (matches.Count > 1) {
-                var actionArgs = matches[1].Value.Split("|");
+
+
+            if (actionInfo.Count > 4) {
+                var actionArgs = actionInfo[4].Value.Split("|");
                 foreach (var arg in actionArgs) {
                     if (arg.Length > 0) {
                         args.Add(arg);
@@ -35,10 +40,12 @@ public class StageTimeline : MonoBehaviour
 
     public TextAsset timelineToRead;
     private List<List<StageAction>> actions;
+    Dictionary<string, UnityEvent> onUniqueAction; 
 
     int currTime = -1;
     private void Awake() {
         actions = new List<List<StageAction>>();
+        onUniqueAction = new Dictionary<string, UnityEvent>();
         ReadTimelineFile(timelineToRead.text);
         currTime = -1;
     }
@@ -68,6 +75,16 @@ public class StageTimeline : MonoBehaviour
         }
     }
 
+    public void AddOnUniqueAction(string actionName, UnityAction function) {
+        if (onUniqueAction.ContainsKey(actionName)) {
+            onUniqueAction[actionName].AddListener(function);
+        } else {
+            var unityEvent = new UnityEvent();
+            unityEvent.AddListener(function);
+            onUniqueAction.Add(actionName, unityEvent);
+        }
+    }
+
     public void Advance() {
         currTime++;
         if (currTime >= actions.Count) {
@@ -78,6 +95,12 @@ public class StageTimeline : MonoBehaviour
             return;
         }
         foreach (var action in currActionList) {
+            Debug.Log(action.uniqueActionID);
+            if (action.uniqueActionID.Length > 0 && onUniqueAction.ContainsKey(action.uniqueActionID)) {
+                Debug.Log(action.uniqueActionID + " overridden.");
+                onUniqueAction[action.uniqueActionID].Invoke();
+                continue;
+            }
             var referenced = GameObject.Find(action.objName);
             if (referenced == null) {
                 Debug.LogWarning("Could not find " + action.objName + " for turn " + currTime);
@@ -89,6 +112,10 @@ public class StageTimeline : MonoBehaviour
                 var methods = refType.GetMethods();
                 foreach (var method in methods) {
                     if (method.Name == action.type) {
+                        Debug.Log(method.Name);
+                        foreach (var arg in action.args) {
+                            Debug.Log(arg);
+                        }
                         method.Invoke(component, action.args.ToArray());
                         break;
                     }

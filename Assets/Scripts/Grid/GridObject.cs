@@ -12,6 +12,8 @@ public class GridObject : MonoBehaviour
 
     protected Stage stageObject;
 
+    protected Dictionary<string, string> variables;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,7 @@ public class GridObject : MonoBehaviour
         Initialize();
     }
 
-    protected void Initialize() {
+    protected virtual void Initialize() {
         stageObject = GetComponentInParent<Stage>();
         if (stageObject == null) {
             Debug.LogError("Grid Object could not find Stage script in a parent.");
@@ -34,24 +36,38 @@ public class GridObject : MonoBehaviour
         
     }
 
-    public void Move(string direction) {
+    protected Vector3Int GetDirectionFromString(string direction) {
         switch (direction.ToLower()) {
             case "n":
-                Move(new Vector3Int(0, 1));
-                break;
+                return new Vector3Int(0, 1);
             case "s":
-                Move(new Vector3Int(0, -1));
-                break;
+                return new Vector3Int(0, -1);
             case "e":
-                Move(new Vector3Int(1, 0));
-                break;
+                return new Vector3Int(1, 0);
             case "w":
-                Move(new Vector3Int(-1, 0));
-                break;
+                return new Vector3Int(-1, 0);
+            default:
+                return Vector3Int.zero;
         }
     }
 
-    public void Move(Vector3Int direction) {
-        stageObject.MoveObject(this, direction);
+    public void Move(string direction) {
+        Vector3Int dir = GetDirectionFromString(direction);
+        Move(dir);
+    }
+
+    public void Set(string direction, string variableName) {
+        Vector3Int dir = GetDirectionFromString(direction);
+        if (stageObject.TryGetAdjacent(this, dir, out GridObject result)) {
+            stageObject.SetVariable(variableName, result.name);
+        }
+    }
+
+    public void SetDefault(string variableName, string value) {
+        stageObject.SetVariable(variableName, value);
+    }
+
+    public virtual bool Move(Vector3Int direction) {
+        return stageObject.MoveObject(this, direction);
     }
 }

@@ -4,7 +4,9 @@ Move:Wife|S
 --
 Move:Wife|S
 --
-Talk:Wife|S|It seems this is the murder weapon.
+SetDefault:Wife|MurderWeapon|... uhhh, nothing.
+Set:Wife|S|MurderWeapon
+%MurderWeaponTalk%Talk:Wife|S|It seems this $MurderWeapon is the murder weapon.
 --
 Move:Wife|W
 --

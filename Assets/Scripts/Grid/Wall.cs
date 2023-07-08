@@ -8,7 +8,7 @@ public class Wall : GridObject
         Initialize();
         canMove = false;
     }
-    public new void Move(Vector3Int direction) {
-        return;
+    public override bool Move(Vector3Int direction) {
+        return false;
     }
 }
