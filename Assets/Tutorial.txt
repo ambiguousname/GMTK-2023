@@ -5,22 +5,22 @@ Move:Wife|S
 Move:Wife|S
 --
 SetDefault:Wife|MurderWeapon|... uhhh, nothing.
-Set:Wife|S|MurderWeapon
-%MurderWeaponTalk%Talk:Wife|S|It seems this $MurderWeapon is the murder weapon.
---
-Move:Wife|W
---
-Move:Wife|S
+Move:Wife|E
+Set:Wife|E|MurderWeapon
+%MurderWeaponTalk%Talk:Wife|E|It seems this $MurderWeapon is the murder weapon.
 --
 Move:Wife|E
 --
 Move:Wife|E
 --
 Move:Wife|E
+--
+Move:Wife|E
+--
 Talk:Inspector|W|I have solved the case!
 --
 Move:Inspector|N
-Move:Wife|E
+Move:Wife|W
 --
 Move:Inspector|N
 Move:Wife|N
@@ -29,6 +29,5 @@ Move:Inspector|N
 Move:Wife|N
 --
 Talk:Inspector|N|This fire burns brightly and beautifully, like my mistress.
-Move:Wife|N
 --
 Talk:Inspector|W|The butler must have done it!

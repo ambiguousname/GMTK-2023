@@ -111,8 +111,8 @@ public class Stage : MonoBehaviour {
     public bool TryGetAdjacent(GridObject gridObject, Vector3Int direction, out GridObject result) {
         Vector3 offset = GetOffsetFromObject(gridObject);
 
-        Vector3Int directionScaled = new Vector3Int(direction.x * gridObject.Scale.x, direction.y * gridObject.Scale.y, direction.z * gridObject.Scale.z);
-        return gridObjects.TryGetValue(grid.WorldToCell(gridObject.transform.position - offset) + directionScaled, out result);
+        //Vector3Int directionScaled = new Vector3Int(direction.x * gridObject.Scale.x, direction.y * gridObject.Scale.y, direction.z * gridObject.Scale.z);
+        return gridObjects.TryGetValue(grid.WorldToCell(gridObject.transform.position - offset) + direction, out result);
     }
 
     public void AdvanceTime() {
