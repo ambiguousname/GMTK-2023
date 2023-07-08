@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Actor
 {
+    public GameObject nextNight;
     private void OnMurderWeaponSet(string value) {
         if (value == "Player") {
             stageObject.AddOnUniqueActionListener("MurderWeaponTalk", delegate () {
@@ -12,6 +13,13 @@ public class Player : Actor
                 wife.Talk("S", "It seems that this... Player. Is. the. murder weapon.");
             });
         }
+    }
+
+
+    private bool isInNight = false;
+    public void NextNight() {
+        isInNight = true;
+        nextNight.SetActive(true);
     }
 
     protected override void Initialize() {
@@ -23,6 +31,15 @@ public class Player : Actor
 
     void OnMovement(InputValue value) {
         var move = value.Get<Vector2>();
+
+        if (isInNight) {
+            if (move.x > 0 || move.y > 0) {
+                nextNight.SetActive(false);
+                isInNight = false;
+            }
+            return;
+        }
+
         // So we can only move in one direction:
         if (move.x != 0) {
             Move(new Vector3Int((int)move.x, 0, 0));

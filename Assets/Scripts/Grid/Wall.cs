@@ -8,6 +8,11 @@ public class Wall : GridObject
         Initialize();
         canMove = false;
     }
+
+    public override void ResetObject() {
+        return;
+    }
+
     public override bool Move(Vector3Int direction) {
         return false;
     }

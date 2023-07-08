@@ -12,7 +12,7 @@ public class GridObject : MonoBehaviour
 
     protected Stage stageObject;
 
-    protected Dictionary<string, string> variables;
+    protected Vector3 initialPosition;
 
 
     // Start is called before the first frame update
@@ -28,6 +28,13 @@ public class GridObject : MonoBehaviour
         } else {
             stageObject.RegisterObject(this);
         }
+        initialPosition = this.transform.position;
+    }
+
+    public virtual void ResetObject() {
+        stageObject.DeregisterObject(this);
+        this.transform.position = initialPosition;
+        Initialize();
     }
 
     protected virtual void Destroy() {

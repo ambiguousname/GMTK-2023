@@ -29,6 +29,23 @@ public class Stage : MonoBehaviour {
         audience = GetComponent<StageAudience>();
     }
 
+    public void ResetStage() {
+        audience.ResetExcitement();
+        variables.Clear();
+        onVariableSet.Clear();
+
+        var values = gridObjects.Values.ToArray();
+        for (int i = 0; i < values.Length; i++) {
+            values[i].ResetObject();
+        }
+
+        var triggers = triggerObjects.Values.ToArray();
+
+        for (int i = 0; i < triggers.Length; i++) {
+            triggers[i].ResetObject();
+        }
+    }
+
     private delegate bool GridObjectOperation(Vector3Int pos, GridObject gridObject, params object[] args);
 
     private bool ModifyGridObject(Vector3Int origin, GridObject gridObject, GridObjectOperation operation, params object[] args) {
@@ -49,7 +66,11 @@ public class Stage : MonoBehaviour {
     }
 
     private bool AddGridObject(Vector3Int pos, GridObject gridObject, params object[] args) {
-        gridObjects.Add(pos, gridObject);
+        if (gridObjects.ContainsKey(pos)) {
+            Debug.LogWarning(pos + " could not add " + gridObject.name + " already has " + gridObjects[pos].name);
+        } else {
+            gridObjects.Add(pos, gridObject);
+        }
         return true;
     }
 
@@ -87,6 +108,11 @@ public class Stage : MonoBehaviour {
     public void RegisterTrigger(Trigger triggerObject) {
         var cellPos = grid.WorldToCell(triggerObject.transform.position);
         triggerObjects.Add(cellPos, triggerObject);
+    }
+
+    public void DeregisterTrigger(Trigger triggerObject) {
+        var cellPos = grid.WorldToCell(triggerObject.transform.position);
+        triggerObjects.Remove(cellPos);
     }
 
 

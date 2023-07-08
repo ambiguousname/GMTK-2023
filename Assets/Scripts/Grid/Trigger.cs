@@ -18,4 +18,9 @@ public class Trigger : MonoBehaviour
             stageObject.RegisterTrigger(this);
         }
     }
+
+    public void ResetObject() {
+        stageObject.DeregisterTrigger(this);
+        stageObject.RegisterTrigger(this);
+    }
 }

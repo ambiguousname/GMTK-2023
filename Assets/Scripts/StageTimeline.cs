@@ -40,14 +40,28 @@ public class StageTimeline : MonoBehaviour
 
     public TextAsset timelineToRead;
     private List<List<StageAction>> actions;
+    private List<List<StageAction>> timelineCopy;
     Dictionary<string, UnityEvent> onUniqueAction; 
 
     int currTime = -1;
+
+    Stage stage;
     private void Awake() {
         actions = new List<List<StageAction>>();
         onUniqueAction = new Dictionary<string, UnityEvent>();
         ReadTimelineFile(timelineToRead.text);
+        timelineCopy = new List<List<StageAction>>(actions);
         currTime = -1;
+
+        stage = GetComponent<Stage>();
+    }
+    private void ResetTimeline() {
+        actions.Clear();
+        actions = new List<List<StageAction>>(timelineCopy);
+        currTime = -1;
+        onUniqueAction.Clear();
+        onUniqueAction = new Dictionary<string, UnityEvent>();
+        stage.ResetStage();
     }
 
     /*
@@ -88,6 +102,8 @@ public class StageTimeline : MonoBehaviour
     public void Advance() {
         currTime++;
         if (currTime >= actions.Count) {
+            GameObject.Find("Player").GetComponent<Player>().NextNight();
+            ResetTimeline();
             return;
         }
         var currActionList = actions[currTime];
