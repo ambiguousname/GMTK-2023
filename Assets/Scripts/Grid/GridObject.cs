@@ -39,6 +39,7 @@ public class GridObject : MonoBehaviour
     }
 
     public virtual void ResetObject() {
+        Debug.Log("RESET");
         GetComponentInChildren<SpriteRenderer>().enabled = true;
         stageObject.DeregisterObject(this);
         this.transform.position = initialPosition;
@@ -59,11 +60,16 @@ public class GridObject : MonoBehaviour
         return new Vector3Int((int)dist.x, (int)dist.y, (int)dist.z);
     }
 
+
+    protected void AwaitDestroyObject() {
+        stageObject.DeregisterObject(this);
+        stageObject.onAdvance.RemoveListener(AwaitDestroyObject);
+    }
+
     protected virtual void DestroyThisObject() {
         if (stageObject != null) {
-            stageObject.DeregisterObject(this);
+            stageObject.onAdvance.AddListener(AwaitDestroyObject);
             stageObject.onReset.AddListener(ResetObject);
-            Debug.Log(stageObject.onReset);
         }
         GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
@@ -98,6 +104,8 @@ public class GridObject : MonoBehaviour
         Vector3Int dir = GetDirectionFromString(direction);
         if (stageObject.TryGetAdjacent(this, dir, out GridObject result)) {
             stageObject.SetVariable(variableName, result.name);
+        } else if (stageObject.TryGetAdjacentTrigger(this, dir, out Trigger triggerResult)) {
+            stageObject.SetVariable(variableName, triggerResult.name);
         }
     }
 

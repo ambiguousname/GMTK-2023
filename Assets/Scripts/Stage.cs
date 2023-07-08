@@ -31,11 +31,6 @@ public class Stage : MonoBehaviour {
     }
 
     public void ResetStage() {
-        timeline.ResetTimeline();
-        audience.ResetExcitement();
-        variables.Clear();
-        onVariableSet.Clear();
-
         var values = gridObjects.Values.ToArray();
         for (int i = 0; i < values.Length; i++) {
             values[i].ResetObject();
@@ -46,6 +41,12 @@ public class Stage : MonoBehaviour {
         for (int i = 0; i < triggers.Length; i++) {
             triggers[i].ResetObject();
         }
+
+        timeline.ResetTimeline();
+        audience.ResetExcitement();
+        variables.Clear();
+        onVariableSet.Clear();
+
         onReset.Invoke();
     }
 
@@ -149,7 +150,14 @@ public class Stage : MonoBehaviour {
         Vector3 offset = GetOffsetFromObject(gridObject);
 
         //Vector3Int directionScaled = new Vector3Int(direction.x * gridObject.Scale.x, direction.y * gridObject.Scale.y, direction.z * gridObject.Scale.z);
-        return gridObjects.TryGetValue(grid.WorldToCell(gridObject.transform.position - offset) + direction, out result);
+        return gridObjects.TryGetValue(grid.WorldToCell(gridObject.transform.position) + direction, out result);
+    }
+
+    public bool TryGetAdjacentTrigger(GridObject gridObject, Vector3Int direction, out Trigger result) {
+        Vector3 offset = GetOffsetFromObject(gridObject);
+
+        //Vector3Int directionScaled = new Vector3Int(direction.x * gridObject.Scale.x, direction.y * gridObject.Scale.y, direction.z * gridObject.Scale.z);
+        return triggerObjects.TryGetValue(grid.WorldToCell(gridObject.transform.position - offset) + direction, out result);
     }
 
     public void AdvanceTime() {

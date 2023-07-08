@@ -32,6 +32,12 @@ public class Actor : GridObject
         }
     }
 
+    public override void ResetObject() {
+        base.ResetObject();
+        fireTimer = 0;
+        dialogueBox.gameObject.SetActive(false);
+    }
+
     protected void HideDialogue() {
         dialogueBox.gameObject.SetActive(false);
         talkToIndicator.SetActive(false);
@@ -61,6 +67,9 @@ public class Actor : GridObject
 
         if (stageObject.TryGetAdjacent(this, direction, out GridObject result) && result != this) {
             result.ActionAt(Actions.TALK, direction);
+        }
+        if (stageObject.TryGetAdjacentTrigger(this, direction, out Trigger resultTrigger)) {
+            resultTrigger.ActionAt(Actions.TALK, direction);
         }
     }
 

@@ -38,19 +38,32 @@ Move:Wife|E
 Move:Wife|E
 --
 Move:Wife|E
-Move:Inspector|W
 --
-Talk:Inspector|N|I have solved the case!
+Talk:Inspector|W|I have solved the case, thanks to this $MurderWeapon!
 --
-Move:Inspector|N
+Move:Inspector|S
 Move:Wife|W
 --
+Move:Inspector|W
+Move:Wife|W
+--
+Move:Inspector|W
+--
 Move:Inspector|N
-Move:Wife|N
+--
+Move:Inspector|E
+--
+Move:Inspector|S
+--
+Move:Inspector|E
 --
 Move:Inspector|N
 Move:Wife|N
 --
-Talk:Inspector|N|This fire burns brightly and beautifully, like my mistress.
+Move:Inspector|N
+Move:Wife|N
+--
+Set:Inspector|N|Fireplace
+Talk:Inspector|N|This $Fireplace burns brightly and beautifully, like my mistress.
 --
 Talk:Inspector|N|The butler must have done it!

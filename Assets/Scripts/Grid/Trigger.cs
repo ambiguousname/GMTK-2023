@@ -24,6 +24,10 @@ public class Trigger : MonoBehaviour
         }
     }
 
+    public virtual void ActionAt(GridObject.Actions a, Vector3Int direction) {
+        return;
+    }
+
     public void ResetObject() {
         stageObject.DeregisterTrigger(this);
         stageObject.RegisterTrigger(this);
