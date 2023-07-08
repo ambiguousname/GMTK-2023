@@ -38,10 +38,9 @@ Move:Wife|E
 Move:Wife|E
 --
 Move:Wife|E
+Move:Inspector|W
 --
-Move:Wife|E
---
-Talk:Inspector|W|I have solved the case!
+Talk:Inspector|N|I have solved the case!
 --
 Move:Inspector|N
 Move:Wife|W
@@ -54,4 +53,4 @@ Move:Wife|N
 --
 Talk:Inspector|N|This fire burns brightly and beautifully, like my mistress.
 --
-Talk:Inspector|W|The butler must have done it!
+Talk:Inspector|N|The butler must have done it!

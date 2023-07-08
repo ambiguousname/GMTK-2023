@@ -8,11 +8,14 @@ public class Actor : GridObject
     public DialogueBox dialogueBox;
     public GameObject talkToIndicator;
 
+    Vector3 initialTalkPos;
+
     protected override void Initialize() {
         base.Initialize();
         if (stageObject != null) {
             stageObject.beforeAdvance.AddListener(HideDialogue);
         }
+        initialTalkPos = talkToIndicator.transform.localPosition;
     }
 
     protected void HideDialogue() {
@@ -37,7 +40,7 @@ public class Actor : GridObject
     public void Talk(Vector3Int direction, string dialogue) {
         dialogueBox.gameObject.SetActive(true);
         talkToIndicator.SetActive(true);
-        talkToIndicator.transform.localPosition = new Vector3(0, 0.5f) + direction;
+        talkToIndicator.transform.localPosition = initialTalkPos + direction;
 
         var variableReplaced = GetVariablesFromDialogue(dialogue);
         dialogueBox.ShowText(variableReplaced);

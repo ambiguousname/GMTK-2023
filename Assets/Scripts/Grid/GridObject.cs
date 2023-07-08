@@ -44,7 +44,7 @@ public class GridObject : MonoBehaviour
     }
 
     public virtual void ActionAt(Actions a) {
-        return;
+        stageObject.Excite(0.1f);
     }
 
     protected virtual void Destroy() {
