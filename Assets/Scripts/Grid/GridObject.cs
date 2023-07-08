@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GridObject : MonoBehaviour
 {
@@ -43,8 +44,11 @@ public class GridObject : MonoBehaviour
         Initialize();
     }
 
-    public virtual void ActionAt(Actions a) {
+    public virtual void ActionAt(Actions a, Vector3Int direction) {
         stageObject.Excite(0.1f);
+        if (a == Actions.FIRE) {
+            Destroy();
+        }
     }
 
     protected virtual void Destroy() {

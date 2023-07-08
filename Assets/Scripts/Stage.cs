@@ -75,12 +75,12 @@ public class Stage : MonoBehaviour {
     }
 
     private bool PushAdjacentObjects(Vector3Int pos, GridObject gridObject, params object[] args) {
-
+        Vector3Int dir = (Vector3Int)args[0];
         if (gridObjects.TryGetValue(pos, out GridObject newGridObject) && newGridObject != gridObject) {
-            return newGridObject.Move((Vector3Int)args[0]);
+            return newGridObject.Move(dir);
         }
         if (triggerObjects.TryGetValue(pos, out Trigger triggerVal)) {
-            triggerVal.onTrigger.Invoke(gridObject);
+            triggerVal.onTrigger.Invoke(gridObject, dir);
         }
         return true;
     }
@@ -107,7 +107,11 @@ public class Stage : MonoBehaviour {
 
     public void RegisterTrigger(Trigger triggerObject) {
         var cellPos = grid.WorldToCell(triggerObject.transform.position);
-        triggerObjects.Add(cellPos, triggerObject);
+        for (int i = 0; i < triggerObject.Scale.x; i++) {
+            for (int j = 0; j < triggerObject.Scale.y; j++) {
+                triggerObjects.Add(cellPos - new Vector3Int(i, j), triggerObject);
+            }
+        }
     }
 
     public void DeregisterTrigger(Trigger triggerObject) {
