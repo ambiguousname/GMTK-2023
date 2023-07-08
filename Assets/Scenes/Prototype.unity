@@ -959,6 +959,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2134135770}
     m_Modifications:
+    - target: {fileID: 3253614909793073414, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3253614910852960189, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4257245370967700538, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
       propertyPath: m_Name
       value: Inspector
