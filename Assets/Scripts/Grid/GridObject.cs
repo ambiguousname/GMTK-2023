@@ -43,10 +43,10 @@ public class GridObject : MonoBehaviour
                 Move(new Vector3Int(0, -1));
                 break;
             case "e":
-                Move(new Vector3Int(-1, 0));
+                Move(new Vector3Int(1, 0));
                 break;
             case "w":
-                Move(new Vector3Int(1, 0));
+                Move(new Vector3Int(-1, 0));
                 break;
         }
     }

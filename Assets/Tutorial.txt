@@ -1,20 +1,32 @@
 Talk:Inspector|N|He's dead!
 --
+Move:Wife|S
 --
+Move:Wife|S
 --
-Talk:Wife|W|It seems this is the murder weapon.
+Talk:Wife|S|It seems this is the murder weapon.
 --
+Move:Wife|W
 --
+Move:Wife|S
 --
+Move:Wife|E
 --
+Move:Wife|E
 --
-Talk:Inspector|E|I have solved the case!
+Move:Wife|E
+Talk:Inspector|W|I have solved the case!
 --
+Move:Inspector|N
+Move:Wife|E
 --
+Move:Inspector|N
+Move:Wife|N
 --
---
---
+Move:Inspector|N
+Move:Wife|N
 --
 Talk:Inspector|N|This fire burns brightly and beautifully, like my mistress.
+Move:Wife|N
 --
-Talk:Inspector|S|The butler must have done it!
+Talk:Inspector|W|The butler must have done it!
