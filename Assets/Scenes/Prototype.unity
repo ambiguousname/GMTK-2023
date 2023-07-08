@@ -736,6 +736,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2134135770}
     m_Modifications:
     - target: {fileID: 4257245370967700538, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 4257245370967700538, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
       propertyPath: m_Name
       value: Wife
       objectReference: {fileID: 0}
@@ -968,6 +972,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4257245370967700538, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 4257245370967700538, guid: 3921b942145c19e49aa16ff61bef9ee1, type: 3}
       propertyPath: m_Name
       value: Inspector
       objectReference: {fileID: 0}
@@ -1096,6 +1104,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5985157756298738579, guid: 24b66d28ae4947b408b33290f05cb46a, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 5985157756298738579, guid: 24b66d28ae4947b408b33290f05cb46a, type: 3}
       propertyPath: m_Name
       value: Player

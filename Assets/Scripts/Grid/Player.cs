@@ -9,7 +9,7 @@ public class Player : Actor
         if (value == "Player") {
             stageObject.AddOnUniqueActionListener("MurderWeaponTalk", delegate () {
                 var wife = GameObject.Find("Wife").GetComponent<Actor>();
-                wife.Talk("S", "Test!");
+                wife.Talk("S", "It seems that this... Player. Is. the. murder weapon.");
             });
         }
     }
