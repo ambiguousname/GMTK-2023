@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Trigger : MonoBehaviour
 {
+    public string displayName;
     public Vector3Int Scale = new Vector3Int(1, 1);
     public UnityEvent<GridObject, Vector3Int> onTrigger;
 
@@ -22,6 +23,7 @@ public class Trigger : MonoBehaviour
         } else {
             stageObject.RegisterTrigger(this);
         }
+        displayName = this.name;
     }
 
     public virtual void ActionAt(GridObject.Actions a, Vector3Int direction) {

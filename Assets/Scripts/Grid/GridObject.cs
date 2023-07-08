@@ -5,10 +5,12 @@ using UnityEngine.Events;
 
 public class GridObject : MonoBehaviour
 {
+    public string displayName;
+
     public enum Actions {
         TALK,
         FIRE,
-        DROP_ON
+        EXTINGUISH
     }
 
     public Vector3 GridAnchor = new Vector2(0.5f, 0.5f);
@@ -29,6 +31,7 @@ public class GridObject : MonoBehaviour
     }
 
     protected virtual void Initialize() {
+        displayName = this.name;
         stageObject = GetComponentInParent<Stage>();
         if (stageObject == null) {
             Debug.LogError("Grid Object could not find Stage script in a parent.");
@@ -103,9 +106,9 @@ public class GridObject : MonoBehaviour
     public void Set(string direction, string variableName) {
         Vector3Int dir = GetDirectionFromString(direction);
         if (stageObject.TryGetAdjacent(this, dir, out GridObject result)) {
-            stageObject.SetVariable(variableName, result.name);
+            stageObject.SetVariable(variableName, result.displayName);
         } else if (stageObject.TryGetAdjacentTrigger(this, dir, out Trigger triggerResult)) {
-            stageObject.SetVariable(variableName, triggerResult.name);
+            stageObject.SetVariable(variableName, triggerResult.displayName);
         }
     }
 
