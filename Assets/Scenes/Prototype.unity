@@ -830,8 +830,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56fb1536c8f43644a89a7a387a202afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridAnchor: {x: 0, y: 0.5, z: 0}
-  Scale: {x: 1, y: 15, z: 0}
+  GridAnchor: {x: 0, y: 0, z: 0}
+  Scale: {x: 1, y: 12, z: 0}
   canMove: 1
 --- !u!65 &1299209527
 BoxCollider:
@@ -844,8 +844,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 15, z: 1}
-  m_Center: {x: 0, y: -7, z: 0}
+  m_Size: {x: 1, y: 12, z: 1}
+  m_Center: {x: 0, y: -6, z: 0}
 --- !u!1 &1544736238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,8 +1103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56fb1536c8f43644a89a7a387a202afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridAnchor: {x: 0, y: 0.5, z: 0}
-  Scale: {x: 1, y: 15, z: 0}
+  GridAnchor: {x: 0, y: 0, z: 0}
+  Scale: {x: 1, y: 12, z: 0}
   canMove: 1
 --- !u!65 &2074806228
 BoxCollider:
@@ -1117,8 +1117,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 15, z: 1}
-  m_Center: {x: 0, y: -7, z: 0}
+  m_Size: {x: 1, y: 12, z: 1}
+  m_Center: {x: 0, y: -6, z: 0}
 --- !u!1 &2076084234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,11 +1613,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5985157756298738578, guid: 24b66d28ae4947b408b33290f05cb46a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5985157756298738578, guid: 24b66d28ae4947b408b33290f05cb46a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5985157756298738578, guid: 24b66d28ae4947b408b33290f05cb46a, type: 3}
       propertyPath: m_LocalPosition.z

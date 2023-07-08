@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : Actor
 {
     public GameObject nextNight;
+    TextMeshProUGUI text;
+    int night = 1;
     private void OnMurderWeaponSet(string value) {
         if (value == "Player") {
             stageObject.AddOnUniqueActionListener("MurderWeaponTalk", delegate () {
@@ -20,6 +23,8 @@ public class Player : Actor
     public void NextNight() {
         isInNight = true;
         nextNight.SetActive(true);
+        night++;
+        text.text = "Night " + night + " \n Press to continue.";
     }
 
     protected override void Initialize() {
@@ -27,6 +32,7 @@ public class Player : Actor
         if (stageObject != null) {
             stageObject.AddVariableSetListener("MurderWeapon", OnMurderWeaponSet);
         }
+        text = nextNight.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void OnMovement(InputValue value) {
