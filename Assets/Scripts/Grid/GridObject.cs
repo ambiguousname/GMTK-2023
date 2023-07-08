@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GridObject : MonoBehaviour
 {
+    public enum Actions {
+        TALK,
+        FIRE,
+        DROP_ON
+    }
+
     public Vector3 GridAnchor = new Vector2(0.5f, 0.5f);
 
     public Vector3Int Scale = new Vector3Int(1, 1);
@@ -35,6 +41,10 @@ public class GridObject : MonoBehaviour
         stageObject.DeregisterObject(this);
         this.transform.position = initialPosition;
         Initialize();
+    }
+
+    public virtual void ActionAt(Actions a) {
+        return;
     }
 
     protected virtual void Destroy() {

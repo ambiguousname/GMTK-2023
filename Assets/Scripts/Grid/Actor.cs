@@ -39,7 +39,15 @@ public class Actor : GridObject
         dialogueBox.ShowText(variableReplaced);
 
         if (stageObject.TryGetAdjacent(this, direction, out GridObject result)) {
+            result.ActionAt(Actions.TALK);
+        }
+    }
 
+    public override void ActionAt(Actions a) {
+        switch (a) {
+            case Actions.TALK:
+                stageObject.Excite(0.08f);
+                break;
         }
     }
 

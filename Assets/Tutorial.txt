@@ -1,8 +1,32 @@
 Talk:Inspector|N|He's dead!
 --
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
 Move:Wife|S
 --
 Move:Wife|S
+--
+Move:Wife|S
+--
+Move:Wife|S
+--
+Move:Wife|S
+--
+Move:Wife|S
+--
+Move:Wife|E
+--
+Move:Wife|E
+--
+Move:Wife|E
 --
 SetDefault:Wife|MurderWeapon|... uhhh, nothing.
 Move:Wife|E

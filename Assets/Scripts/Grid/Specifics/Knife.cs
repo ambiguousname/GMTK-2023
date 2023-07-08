@@ -16,6 +16,7 @@ public class Knife : GridObject
 
     private void StabOnce() {
         actorToStab.Stab(directionToStab);
+        stageObject.Excite(0.1f);
         stageObject.onAdvance.RemoveListener(StabOnce);
     }
 
