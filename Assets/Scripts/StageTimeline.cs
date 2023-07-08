@@ -72,7 +72,7 @@ public class StageTimeline : MonoBehaviour
      * --
      * ^ This is a separator for the actions, so it represents one turn.
      */
-    private void ReadTimelineFile(string text) {
+    private void ReadTimelineFile(string text, int startIndex=0) {
         var lines = text.Replace("\r", "").Split("--");
         for (int turn = 0; turn < lines.Length; turn++) {
             // Get rid of carriage return
@@ -85,8 +85,17 @@ public class StageTimeline : MonoBehaviour
                 }
             }
 
-            actions.Add(actionsToExecute);
+            if (actions.Count <= turn + startIndex) {
+                actions.Add(actionsToExecute);
+            } else {
+                // For appending multiple timelines to the list of actions:
+                actions[turn + startIndex].AddRange(actionsToExecute);
+            }
         }
+    }
+
+    public void AppendTimeline(string text, int startIndex = 0) {
+        ReadTimelineFile(text, startIndex);
     }
 
     public void AddOnUniqueAction(string actionName, UnityAction function) {

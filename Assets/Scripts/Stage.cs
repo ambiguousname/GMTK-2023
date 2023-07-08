@@ -147,6 +147,10 @@ public class Stage : MonoBehaviour {
         onAdvance.Invoke();
     }
 
+    public void AppendTimeline(string text, int startIndex=0) {
+        timeline.AppendTimeline(text, startIndex);
+    }
+
     public void Excite(float amount) {
         audience.AddExcitement(amount);
     }

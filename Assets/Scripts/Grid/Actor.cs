@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 public class Actor : GridObject
 {
     public DialogueBox dialogueBox;
+    public GameObject talkToIndicator;
 
     protected override void Initialize() {
         base.Initialize();
@@ -16,6 +17,7 @@ public class Actor : GridObject
 
     protected void HideDialogue() {
         dialogueBox.gameObject.SetActive(false);
+        talkToIndicator.SetActive(false);
     }
     
     protected readonly string variableMatch = @"\$\w+";
@@ -34,6 +36,8 @@ public class Actor : GridObject
 
     public void Talk(Vector3Int direction, string dialogue) {
         dialogueBox.gameObject.SetActive(true);
+        talkToIndicator.SetActive(true);
+        talkToIndicator.transform.localPosition = new Vector3(0, 0.5f) + direction;
 
         var variableReplaced = GetVariablesFromDialogue(dialogue);
         dialogueBox.ShowText(variableReplaced);
