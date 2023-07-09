@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GridObject : MonoBehaviour
 {
+    public string displayName;
+
     public enum Actions {
         TALK,
         FIRE,
-        DROP_ON
+        EXTINGUISH
     }
 
     public Vector3 GridAnchor = new Vector2(0.5f, 0.5f);
@@ -28,6 +31,7 @@ public class GridObject : MonoBehaviour
     }
 
     protected virtual void Initialize() {
+        displayName = this.name;
         stageObject = GetComponentInParent<Stage>();
         if (stageObject == null) {
             Debug.LogError("Grid Object could not find Stage script in a parent.");
@@ -38,20 +42,39 @@ public class GridObject : MonoBehaviour
     }
 
     public virtual void ResetObject() {
+        Debug.Log("RESET");
+        GetComponentInChildren<SpriteRenderer>().enabled = true;
         stageObject.DeregisterObject(this);
         this.transform.position = initialPosition;
         Initialize();
+        stageObject.onReset.RemoveListener(ResetObject);
     }
 
-    public virtual void ActionAt(Actions a) {
-        return;
-    }
-
-    protected virtual void Destroy() {
-        if (stageObject != null) {
-            stageObject.DeregisterObject(this);
+    public virtual void ActionAt(Actions a, Vector3Int direction) {
+        stageObject.Excite(0.1f);
+        if (a == Actions.FIRE) {
+            DestroyThisObject();
         }
-        Destroy(gameObject);
+    }
+
+    protected Vector3Int GetDirectionToPos(Vector3 pos) {
+        var dist = pos - this.transform.position;
+        dist.Normalize();
+        return new Vector3Int((int)dist.x, (int)dist.y, (int)dist.z);
+    }
+
+
+    protected void AwaitDestroyObject() {
+        stageObject.DeregisterObject(this);
+        stageObject.onAdvance.RemoveListener(AwaitDestroyObject);
+    }
+
+    protected virtual void DestroyThisObject() {
+        if (stageObject != null) {
+            stageObject.onAdvance.AddListener(AwaitDestroyObject);
+            stageObject.onReset.AddListener(ResetObject);
+        }
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
@@ -83,7 +106,9 @@ public class GridObject : MonoBehaviour
     public void Set(string direction, string variableName) {
         Vector3Int dir = GetDirectionFromString(direction);
         if (stageObject.TryGetAdjacent(this, dir, out GridObject result)) {
-            stageObject.SetVariable(variableName, result.name);
+            stageObject.SetVariable(variableName, result.displayName);
+        } else if (stageObject.TryGetAdjacentTrigger(this, dir, out Trigger triggerResult)) {
+            stageObject.SetVariable(variableName, triggerResult.displayName);
         }
     }
 

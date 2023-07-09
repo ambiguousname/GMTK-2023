@@ -11,22 +11,25 @@ public class Knife : GridObject
         }
     }
 
-    Actor actorToStab;
+    GridObject thingToStab;
     Vector3Int directionToStab;
 
     private void StabOnce() {
-        actorToStab.Stab(directionToStab);
+        thingToStab.displayName += ", Stabbed By A Knife";
+        if ((thingToStab.GetType()).IsSubclassOf(typeof(Actor))) {
+            ((Actor)thingToStab).Stab(directionToStab);
+        }
         stageObject.Excite(0.1f);
         stageObject.onAdvance.RemoveListener(StabOnce);
     }
 
     public override bool Move(Vector3Int direction) {
         if (stageObject.TryGetAdjacent(this, direction, out GridObject result)) {
-            if (result.GetType().IsAssignableFrom(typeof(Actor))) {
-                actorToStab = (Actor)result;
+            if (result.canMove) {
+                thingToStab = result;
                 directionToStab = -direction; 
                 stageObject.onAdvance.AddListener(StabOnce);
-                Destroy();
+                DestroyThisObject();
                 return true;
             }
         }

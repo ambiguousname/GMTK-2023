@@ -55,13 +55,12 @@ public class StageTimeline : MonoBehaviour
 
         stage = GetComponent<Stage>();
     }
-    private void ResetTimeline() {
+    public void ResetTimeline() {
         actions.Clear();
         actions = new List<List<StageAction>>(timelineCopy);
         currTime = -1;
         onUniqueAction.Clear();
         onUniqueAction = new Dictionary<string, UnityEvent>();
-        stage.ResetStage();
     }
 
     /*
@@ -112,7 +111,6 @@ public class StageTimeline : MonoBehaviour
         currTime++;
         if (currTime >= actions.Count) {
             GameObject.Find("Player").GetComponent<Player>().NextNight();
-            ResetTimeline();
             return;
         }
         var currActionList = actions[currTime];

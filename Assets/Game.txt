@@ -1,4 +1,4 @@
-Talk:Inspector|N|He's dead!
+Talk:Inspector|E|He's dead!
 --
 Move:Wife|W
 --
@@ -39,19 +39,31 @@ Move:Wife|E
 --
 Move:Wife|E
 --
-Move:Wife|E
+Talk:Inspector|W|I have solved the case, thanks to this $MurderWeapon!
 --
-Talk:Inspector|W|I have solved the case!
---
-Move:Inspector|N
+Move:Inspector|S
 Move:Wife|W
 --
+Move:Inspector|W
+Move:Wife|W
+--
+Move:Inspector|W
+--
+Move:Inspector|N
+--
+Move:Inspector|E
+--
+Move:Inspector|S
+--
+Move:Inspector|E
+--
 Move:Inspector|N
 Move:Wife|N
 --
 Move:Inspector|N
 Move:Wife|N
 --
-Talk:Inspector|N|This fire burns brightly and beautifully, like my mistress.
+Set:Inspector|N|Fireplace
+Talk:Inspector|N|This $Fireplace burns brightly and beautifully, like my mistress.
 --
-Talk:Inspector|W|The butler must have done it!
+Talk:Inspector|N|The butler must have done it!
