@@ -117,6 +117,10 @@ public class GridObject : MonoBehaviour
         }
     }
 
+    public void EndGame() {
+        GameObject.Find("Player").GetComponent<Player>().NextNight();
+    }
+
     public void SetDefault(string variableName, string value) {
         stageObject.SetVariable(variableName, value);
     }

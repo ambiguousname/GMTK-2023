@@ -31,6 +31,7 @@ public class Player : Actor
         if (fireTimer == 1) {
             fireTimer = 0;
             onFire = false;
+            fireIndicator.SetActive(false);
             NextNight();
             text.text = "You burned yourself horribly.\n" + text.text;
             return;

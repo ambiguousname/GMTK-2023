@@ -11,3 +11,25 @@ Move:Wife|W
 TalkSelf:Wife|Ignore me for now.
 --
 Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W
+--
+Move:Wife|W

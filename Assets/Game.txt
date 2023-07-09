@@ -95,3 +95,4 @@ Talk:Inspector|N|The butler must have done it!
 --
 Set:Wife|E|InspectorName|and I have run out of things to say
 %FairCopTalk%Talk:Wife|E|It's a fair cop, $InspectorName.
+EndGame:Inspector
