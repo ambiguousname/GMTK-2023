@@ -106,12 +106,14 @@ public class GridObject : MonoBehaviour
         Move(dir);
     }
 
-    public void Set(string direction, string variableName) {
+    public void Set(string direction, string variableName, string defaultValue) {
         Vector3Int dir = GetDirectionFromString(direction);
         if (stageObject.TryGetAdjacent(this, dir, out GridObject result)) {
             stageObject.SetVariable(variableName, result.displayName);
         } else if (stageObject.TryGetAdjacentTrigger(this, dir, out Trigger triggerResult)) {
             stageObject.SetVariable(variableName, triggerResult.displayName);
+        } else {
+            stageObject.SetVariable(variableName, defaultValue);
         }
     }
 

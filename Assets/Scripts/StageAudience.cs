@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StageAudience : MonoBehaviour
@@ -18,6 +19,9 @@ public class StageAudience : MonoBehaviour
 
     private void Update() {
         stageUI.fillAmount = Mathf.Lerp(stageUI.fillAmount, _audienceExcitement, Time.deltaTime);
+        if (_audienceExcitement >= 0.95f) {
+            SceneManager.LoadScene("WinScreen");
+        }
     }
 
     public void ResetExcitement() {
