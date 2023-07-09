@@ -29,6 +29,7 @@ public class Actor : GridObject
     protected virtual void TurnUpdate() {
         if (fireTimer > 0) {
             fireTimer--;
+            GameObject.Find("FireSound").GetComponent<AudioSource>().Play();
             if (fireTimer <= 0) {
                 excitementMultiplier = 1;
                 onFire = false;
@@ -93,6 +94,7 @@ public class Actor : GridObject
         stageObject.Excite(0.05f * excitementMultiplier);
         Burn(burnDirection);
         stageObject.onAdvance.RemoveListener(BurnOnce);
+        GameObject.Find("FireSound").GetComponent<AudioSource>().Play();
 
         onFire = true;
         fireTimer = 5;

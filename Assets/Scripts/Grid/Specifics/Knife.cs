@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Knife : GridObject
 {
+    public AudioSource audio;
     protected override void Initialize() {
         base.Initialize();
         if (stageObject != null) {
@@ -23,6 +24,7 @@ public class Knife : GridObject
         thingToStab.excitementMultiplier += 0.3f;
         stageObject.Excite(0.2f * excitementMultiplier);
         stageObject.onAdvance.RemoveListener(StabOnce);
+        audio.Play();
     }
 
     public override bool Move(Vector3Int direction) {

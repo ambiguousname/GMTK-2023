@@ -8,6 +8,7 @@ public class Bomb : GridObject
     public override void ActionAt(Actions a, Vector3Int direction) {
         stageObject.Excite(0.1f * excitementMultiplier);
         if (a == Actions.FIRE) {
+            GameObject.Find("BombSound").GetComponent<AudioSource>().Play();
             List<GridObject> detonated = new List<GridObject>();
             for (int i = -radius; i <= radius; i++) {
                 for (int j = -radius; j <= radius; j++) {

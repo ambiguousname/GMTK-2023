@@ -55,6 +55,7 @@ public class GridObject : MonoBehaviour
     public virtual void ActionAt(Actions a, Vector3Int direction) {
         stageObject.Excite(0.1f * excitementMultiplier);
         if (a == Actions.FIRE || a == Actions.SHRAPNEL) {
+            GameObject.Find("FireSound").GetComponent<AudioSource>().Play();
             DestroyThisObject();
         }
     }
