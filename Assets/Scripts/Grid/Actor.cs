@@ -112,7 +112,7 @@ public class Actor : GridObject
     public override void ActionAt(Actions a, Vector3Int direction) {
         switch (a) {
             case Actions.TALK:
-                stageObject.Excite(0.04f * excitementMultiplier);
+                stageObject.Excite(0.05f * excitementMultiplier);
                 break;
             case Actions.FIRE:
                 if (!onFire) {
@@ -142,6 +142,7 @@ public class Actor : GridObject
     }
 
     public void Stab(Vector3Int direction) {
+        Debug.Log(name);
         Talk(direction, "You stabbed me!");
     }
 }

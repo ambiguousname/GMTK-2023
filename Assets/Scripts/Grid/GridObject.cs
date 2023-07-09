@@ -76,7 +76,6 @@ public class GridObject : MonoBehaviour
             stageObject.onAdvance.AddListener(AwaitDestroyObject);
             stageObject.onReset.AddListener(ResetObject);
         }
-        Debug.Log(this.name);
         GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
 
