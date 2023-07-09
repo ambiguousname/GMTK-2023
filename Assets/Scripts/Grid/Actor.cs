@@ -7,8 +7,14 @@ public class Actor : GridObject
 {
     public DialogueBox dialogueBox;
     public GameObject talkToIndicator;
+    public GameObject fireIndicator;
 
     Vector3 initialTalkPos;
+
+    private void Start() {
+        Initialize();
+        initialTalkPos = talkToIndicator.transform.localPosition;
+    }
 
     protected override void Initialize() {
         base.Initialize();
@@ -16,7 +22,6 @@ public class Actor : GridObject
             stageObject.beforeAdvance.AddListener(HideDialogue);
             stageObject.onAdvance.AddListener(TurnUpdate);
         }
-        initialTalkPos = talkToIndicator.transform.localPosition;
     }
 
     protected int fireTimer = 0;
@@ -27,6 +32,7 @@ public class Actor : GridObject
             if (fireTimer <= 0) {
                 excitementMultiplier = 1;
                 onFire = false;
+                fireIndicator.SetActive(false);
             } else {
                 Talk(Vector3Int.zero, "AAAAAAAAA!");
             }
@@ -39,6 +45,7 @@ public class Actor : GridObject
         base.ResetObject();
         fireTimer = 0;
         onFire = false;
+        fireIndicator.SetActive(false);
         dialogueBox.gameObject.SetActive(false);
     }
 
@@ -89,6 +96,7 @@ public class Actor : GridObject
 
         onFire = true;
         fireTimer = 5;
+        fireIndicator.SetActive(true);
     }
 
     Vector3Int shrapnelDirection;
