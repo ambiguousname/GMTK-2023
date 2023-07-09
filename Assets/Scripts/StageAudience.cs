@@ -34,5 +34,8 @@ public class StageAudience : MonoBehaviour
 
     private void ModifyAudienceExcitement() {
         _audienceExcitement -= 0.01f;
+        if (_audienceExcitement <= 0) {
+            _audienceExcitement = 0.01f;
+        }
     }
 }
