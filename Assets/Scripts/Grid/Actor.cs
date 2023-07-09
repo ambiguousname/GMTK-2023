@@ -90,7 +90,7 @@ public class Actor : GridObject
 
     Vector3Int burnDirection;
     protected void BurnOnce() {
-        stageObject.Excite(0.1f * excitementMultiplier);
+        stageObject.Excite(0.05f * excitementMultiplier);
         Burn(burnDirection);
         stageObject.onAdvance.RemoveListener(BurnOnce);
 
@@ -116,7 +116,7 @@ public class Actor : GridObject
                 break;
             case Actions.FIRE:
                 if (!onFire) {
-                    excitementMultiplier += 0.1f;
+                    excitementMultiplier += 0.05f;
                     burnDirection = direction;
                     stageObject.onAdvance.AddListener(BurnOnce);
                 }

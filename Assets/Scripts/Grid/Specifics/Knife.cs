@@ -20,8 +20,8 @@ public class Knife : GridObject
             ((Actor)thingToStab).Stab(directionToStab);
         }
         stageObject.SetVariable("StabbedObject", thingToStab.name);
-        thingToStab.excitementMultiplier += 0.5f;
-        stageObject.Excite(0.1f * excitementMultiplier);
+        thingToStab.excitementMultiplier += 0.3f;
+        stageObject.Excite(0.2f * excitementMultiplier);
         stageObject.onAdvance.RemoveListener(StabOnce);
     }
 
