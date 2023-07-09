@@ -39,6 +39,7 @@ Move:Wife|E
 --
 Move:Wife|E
 --
+Set:Inspector|W|MurderWeapon
 Talk:Inspector|W|I have solved the case, thanks to this $MurderWeapon!
 --
 Move:Inspector|S
@@ -63,6 +64,7 @@ Move:Wife|N
 Move:Inspector|N
 Move:Wife|N
 --
+SetDefault:Inspector|Fireplace|empty patch of ground
 Set:Inspector|N|Fireplace
 Talk:Inspector|N|This $Fireplace burns brightly and beautifully, like my mistress.
 --

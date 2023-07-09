@@ -16,10 +16,11 @@ public class Knife : GridObject
 
     private void StabOnce() {
         thingToStab.displayName += ", Stabbed By A Knife";
-        if ((thingToStab.GetType()).IsSubclassOf(typeof(Actor))) {
+        if ((thingToStab.GetType()).Equals(typeof(Actor))) {
             ((Actor)thingToStab).Stab(directionToStab);
         }
-        stageObject.Excite(0.1f);
+        thingToStab.excitementMultiplier += 0.5f;
+        stageObject.Excite(0.1f * excitementMultiplier);
         stageObject.onAdvance.RemoveListener(StabOnce);
     }
 

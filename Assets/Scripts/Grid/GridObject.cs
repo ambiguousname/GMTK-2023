@@ -19,6 +19,8 @@ public class GridObject : MonoBehaviour
 
     public bool canMove = true;
 
+    public float excitementMultiplier = 1.0f;
+
     protected Stage stageObject;
 
     protected Vector3 initialPosition;
@@ -42,7 +44,7 @@ public class GridObject : MonoBehaviour
     }
 
     public virtual void ResetObject() {
-        Debug.Log("RESET");
+        excitementMultiplier = 1.0f;
         GetComponentInChildren<SpriteRenderer>().enabled = true;
         stageObject.DeregisterObject(this);
         this.transform.position = initialPosition;
@@ -51,7 +53,7 @@ public class GridObject : MonoBehaviour
     }
 
     public virtual void ActionAt(Actions a, Vector3Int direction) {
-        stageObject.Excite(0.1f);
+        stageObject.Excite(0.1f * excitementMultiplier);
         if (a == Actions.FIRE) {
             DestroyThisObject();
         }

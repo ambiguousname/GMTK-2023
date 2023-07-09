@@ -23,8 +23,9 @@ public class Actor : GridObject
     protected bool onFire = false;
     protected virtual void TurnUpdate() {
         if (fireTimer > 0) {
-            fireTimer -= 1;
+            fireTimer--;
             if (fireTimer <= 0) {
+                excitementMultiplier = 1;
                 onFire = false;
             } else {
                 Talk(Vector3Int.zero, "AAAAAAAAA!");
@@ -33,8 +34,11 @@ public class Actor : GridObject
     }
 
     public override void ResetObject() {
+        stageObject.beforeAdvance.RemoveListener(HideDialogue);
+        stageObject.onAdvance.RemoveListener(TurnUpdate);
         base.ResetObject();
         fireTimer = 0;
+        onFire = false;
         dialogueBox.gameObject.SetActive(false);
     }
 
@@ -75,7 +79,7 @@ public class Actor : GridObject
 
     Vector3Int burnDirection;
     protected void BurnOnce() {
-        stageObject.Excite(0.1f);
+        stageObject.Excite(0.1f * excitementMultiplier);
         Burn(burnDirection);
         stageObject.onAdvance.RemoveListener(BurnOnce);
 
@@ -86,10 +90,11 @@ public class Actor : GridObject
     public override void ActionAt(Actions a, Vector3Int direction) {
         switch (a) {
             case Actions.TALK:
-                stageObject.Excite(0.04f);
+                stageObject.Excite(0.04f * excitementMultiplier);
                 break;
             case Actions.FIRE:
                 if (!onFire) {
+                    excitementMultiplier += 0.1f;
                     burnDirection = direction;
                     stageObject.onAdvance.AddListener(BurnOnce);
                 }
