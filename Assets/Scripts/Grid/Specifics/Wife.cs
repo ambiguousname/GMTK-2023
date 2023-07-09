@@ -6,6 +6,7 @@ public class Wife : Actor
 {
     public TextAsset wifeBurnedAsset;
     private void OnStabSet(string value) {
+        Debug.Log(value == "Wife");
         if (value == "Wife") {
             stageObject.ClearObjectTimeline("Wife");
             stageObject.AppendTimeline(wifeBurnedAsset.text);
