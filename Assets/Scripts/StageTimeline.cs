@@ -129,6 +129,9 @@ public class StageTimeline : MonoBehaviour
         if (currActionList.Count <= 0) {
             return;
         }
+        var source = GameObject.Find("TurnSound").GetComponent<AudioSource>();
+        source.pitch = Random.Range(0.8f, 1.2f);
+        source.Play();
         foreach (var action in currActionList) {
             //Debug.Log(action.uniqueActionID);
             if (action.uniqueActionID.Length > 0 && onUniqueAction.ContainsKey(action.uniqueActionID)) {
