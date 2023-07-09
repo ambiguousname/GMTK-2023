@@ -38,6 +38,9 @@ Move:Wife|E
 Set:Wife|E|MurderWeapon
 %MurderWeaponTalk%Talk:Wife|E|It seems this $MurderWeapon is the murder weapon.
 --
+--
+--
+--
 Move:Wife|E
 --
 Move:Wife|E
