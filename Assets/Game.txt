@@ -33,9 +33,8 @@ Move:Wife|E
 --
 Move:Wife|E
 --
-SetDefault:Wife|MurderWeapon|... uhhh, nothing.
 Move:Wife|E
-Set:Wife|E|MurderWeapon
+Set:Wife|E|MurderWeapon|... uhhh, nothing.
 %MurderWeaponTalk%Talk:Wife|E|It seems this $MurderWeapon is the murder weapon.
 --
 --
@@ -47,7 +46,7 @@ Move:Wife|E
 --
 Move:Wife|E
 --
-Set:Inspector|W|MurderWeapon
+Set:Inspector|W|MurderWeapon|... uhhh, nothing.
 Talk:Inspector|W|I have solved the case, thanks to this $MurderWeapon!
 --
 Move:Inspector|S
@@ -72,8 +71,7 @@ Move:Wife|N
 Move:Inspector|N
 Move:Wife|N
 --
-SetDefault:Inspector|Fireplace|empty patch of ground
-Set:Inspector|N|Fireplace
+Set:Inspector|N|Fireplace|empty patch of ground
 Talk:Inspector|N|This $Fireplace burns brightly and beautifully, like my mistress.
 --
 Talk:Inspector|N|From the humble $Fireplace I draw strength.
@@ -82,6 +80,5 @@ Talk:Inspector|N|From the humble $Fireplace, I can solve this mystery.
 --
 Talk:Inspector|N|The butler must have done it!
 --
-SetDefault:Wife|InspectorName|and I have run out of things to say.
-Set:Wife|E|InspectorName
+Set:Wife|E|InspectorName|and I have run out of things to say.
 %FairCopTalk%Talk:Wife|E|It's a fair cop, $InspectorName.
