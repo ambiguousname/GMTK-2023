@@ -10,8 +10,13 @@ public class Bomb : GridObject
         if (a == Actions.FIRE) {
             for (int i = -radius; i <= radius; i++) {
                 for (int j = -radius; j <= radius; j++) {
-                    if (stageObject.TryGetAdjacent(this, new Vector3Int(i, j), out GridObject result) && result != this) {
-                        result.ActionAt(a, new Vector3Int(i, j));
+                    if (stageObject.TryGetAdjacent(this, new Vector3Int(i, j), out GridObject result) && result.canMove && result != this) {
+                        if (displayName.Contains("Knife")) {
+                            result.excitementMultiplier += 1;
+                            result.ActionAt(Actions.SHRAPNEL, new Vector3Int(i, j));
+                        } else {
+                            result.ActionAt(a, new Vector3Int(i, j));
+                        }
                     }
                 }
             }

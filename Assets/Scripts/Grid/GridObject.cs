@@ -10,7 +10,7 @@ public class GridObject : MonoBehaviour
     public enum Actions {
         TALK,
         FIRE,
-        EXTINGUISH
+        SHRAPNEL
     }
 
     public Vector3 GridAnchor = new Vector2(0.5f, 0.5f);
@@ -54,7 +54,7 @@ public class GridObject : MonoBehaviour
 
     public virtual void ActionAt(Actions a, Vector3Int direction) {
         stageObject.Excite(0.1f * excitementMultiplier);
-        if (a == Actions.FIRE) {
+        if (a == Actions.FIRE || a == Actions.SHRAPNEL) {
             DestroyThisObject();
         }
     }
@@ -76,6 +76,7 @@ public class GridObject : MonoBehaviour
             stageObject.onAdvance.AddListener(AwaitDestroyObject);
             stageObject.onReset.AddListener(ResetObject);
         }
+        Debug.Log(this.name);
         GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
 
