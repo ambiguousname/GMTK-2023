@@ -79,6 +79,6 @@ Talk:Inspector|N|From the humble $Fireplace, I can solve this mystery.
 --
 Talk:Inspector|N|The butler must have done it!
 --
-SetDefault:Wife|InspectorName|Wait, where'd you go?
+SetDefault:Wife|InspectorName|and I have run out of things to say.
 Set:Wife|E|InspectorName
-Talk:Wife|E|It's a fair cop, $InspectorName.
+%FairCopTalk%Talk:Wife|E|It's a fair cop, $InspectorName.
