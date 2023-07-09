@@ -9,6 +9,10 @@ Move:Wife|W
 --
 Move:Wife|W
 --
+TalkSelf:Wife|Wait!
+--
+TalkSelf:Wife|What is that?
+--
 Move:Wife|S
 --
 Move:Wife|S
@@ -69,4 +73,12 @@ SetDefault:Inspector|Fireplace|empty patch of ground
 Set:Inspector|N|Fireplace
 Talk:Inspector|N|This $Fireplace burns brightly and beautifully, like my mistress.
 --
+Talk:Inspector|N|From the humble $Fireplace I draw strength.
+--
+Talk:Inspector|N|From the humble $Fireplace, I can solve this mystery.
+--
 Talk:Inspector|N|The butler must have done it!
+--
+SetDefault:Wife|InspectorName|Wait, where'd you go?
+Set:Wife|E|InspectorName
+Talk:Wife|E|It's a fair cop, $InspectorName.
