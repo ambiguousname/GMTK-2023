@@ -19,6 +19,7 @@ public class Knife : GridObject
         if ((thingToStab.GetType()).Equals(typeof(Actor))) {
             ((Actor)thingToStab).Stab(directionToStab);
         }
+        stageObject.SetVariable("StabbedObject", thingToStab.name);
         thingToStab.excitementMultiplier += 0.5f;
         stageObject.Excite(0.1f * excitementMultiplier);
         stageObject.onAdvance.RemoveListener(StabOnce);
@@ -28,7 +29,7 @@ public class Knife : GridObject
         if (stageObject.TryGetAdjacent(this, direction, out GridObject result)) {
             if (result.canMove) {
                 thingToStab = result;
-                directionToStab = -direction; 
+                directionToStab = -direction;
                 stageObject.onAdvance.AddListener(StabOnce);
                 DestroyThisObject();
                 return true;

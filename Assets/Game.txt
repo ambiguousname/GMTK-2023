@@ -1,5 +1,4 @@
 Talk:Inspector|E|He's dead!
---
 Move:Wife|W
 --
 Move:Wife|W
@@ -9,6 +8,8 @@ Move:Wife|W
 Move:Wife|W
 --
 Move:Wife|W
+--
+Move:Wife|S
 --
 Move:Wife|S
 --

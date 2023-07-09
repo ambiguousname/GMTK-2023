@@ -56,6 +56,10 @@ public class Actor : GridObject
         });
     }
 
+    public void TalkSelf(string dialogue) {
+        Talk(Vector3Int.zero, dialogue);
+    }
+
     public void Talk(string direction, string dialogue) {
         Vector3Int dir = GetDirectionFromString(direction);
         Talk(dir, dialogue);

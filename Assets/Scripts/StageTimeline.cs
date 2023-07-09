@@ -93,8 +93,20 @@ public class StageTimeline : MonoBehaviour
         }
     }
 
-    public void AppendTimeline(string text, int startIndex = 0) {
-        ReadTimelineFile(text, startIndex);
+    public void RemoveAllReferencesToObject(string objectName) {
+        foreach (var actionsList in actions) {
+            for (int i = 0; i < actionsList.Count; i++) {
+                var action = actionsList[i];
+                if (action.objName == objectName) {
+                    actionsList.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+    }
+
+    public void AppendTimeline(string text) {
+        ReadTimelineFile(text, currTime);
     }
 
     public void AddOnUniqueAction(string actionName, UnityAction function) {

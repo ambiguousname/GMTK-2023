@@ -1,0 +1,13 @@
+--
+TalkSelf:Wife|$PlayerName, why do you hate me?
+--
+TalkSelf:Wife|I'm getting out of here.
+Move:Wife|N
+--
+Move:Wife|N
+TalkSelf:Wife|I'll expect my check in the mail.
+--
+Move:Wife|W
+TalkSelf:Wife|Ignore me for now.
+--
+Move:Wife|W

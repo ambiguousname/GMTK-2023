@@ -22,9 +22,9 @@ public class Player : Actor
     }
 
     private void Start() {
-        Initialize();
         var names = new string[] { "Scarlet Vanderbrough", "Johannas Joplin", "Layton Kipling", "Katarina Fencepost"};
         playerName = names[Random.Range(0, names.Length)];
+        Initialize();
     }
 
     protected override void TurnUpdate() {
@@ -56,6 +56,7 @@ public class Player : Actor
         base.Initialize();
         if (stageObject != null) {
             stageObject.AddVariableSetListener("MurderWeapon", OnMurderWeaponSet);
+            stageObject.SetVariable("PlayerName", playerName);
         }
         text = nextNight.GetComponentInChildren<TextMeshProUGUI>();
     }

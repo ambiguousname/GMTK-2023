@@ -50,6 +50,10 @@ public class Stage : MonoBehaviour {
         onReset.Invoke();
     }
 
+    public void ClearObjectTimeline(string objectName) {
+        timeline.RemoveAllReferencesToObject(objectName);
+    }
+
     private delegate bool GridObjectOperation(Vector3Int pos, GridObject gridObject, params object[] args);
 
     private bool ModifyGridObject(Vector3Int origin, GridObject gridObject, GridObjectOperation operation, params object[] args) {
@@ -166,8 +170,8 @@ public class Stage : MonoBehaviour {
         onAdvance.Invoke();
     }
 
-    public void AppendTimeline(string text, int startIndex=0) {
-        timeline.AppendTimeline(text, startIndex);
+    public void AppendTimeline(string text) {
+        timeline.AppendTimeline(text);
     }
 
     public void Excite(float amount) {
@@ -179,6 +183,7 @@ public class Stage : MonoBehaviour {
     }
 
     public void AddVariableSetListener(string name, UnityAction<string> function) {
+        Debug.Log(name);
         if (onVariableSet.ContainsKey(name)) {
             onVariableSet[name].AddListener(function);
         } else {
